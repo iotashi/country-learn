@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <main class="row pl-4">
+{#        left row to list countries#}
+        <section class="container mt-5 left-section col-8" style="height: 100vh; overflow: scroll">
+        <table class="table">
+          <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Country</th>
+                <th scope="col">Population</th>
+                <th scope="col">Language</th>
+                <th scope="col">Currency</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for country in countries %}
+                <tr class="country-row" onclick="get_details('{{ country['name'] }}')">
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ country['name'] }}</td>
+                    <td>{{ country['population'] }}</td>
+                    <td>{{ country['languages'][0]['name'] }}</td>
+                    <td>{{ country['currencies'][0]['name'] }} ( {{ country['currencies'][0]['symbol'] }} )</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </section>
+
+{#        right row to display countries' details#}
+        <section id="display_details" class="container mt-5 right-section col-4">
+            <div class="input-group mb-3">
+              <input id="search" type="text" class="form-control" placeholder="country's name" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="get_country()">
+                    <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+            <div class="first-row row w-100 m-0">
+            <span class="col-4 d-flex justify-content-center align-items-center p-0 border">
+                <img id="flag" src="{{ url_for('static', filename='images/white.png') }}" alt="Country flag" style="height: 80%; width: 80%">
+            </span>
+            <ul class="first-description col-8 m-0 border border-left-0 list-group p-0">
+                <li id="country-name" class="list-group-item border-0">-</li>
+                <li id="country-region" class="list-group-item border-0">-</li>
+                <li id="country-subregion" class="list-group-item border-0">-</li>
+            </ul>
+            </div>
+            <div class="second-row">
+                <p class="m-0 p-4">
+                </p>
+            </div>
+            <div class="third-row">
+                <ul class="more-details list-group">
+                    <li id="country-capital" class="list-group-item pt-2 pb-2"> -</li>
+                    <li id="country-population" class="list-group-item pt-2 pb-2">-</li>
+                    <li id="country-currency" class="list-group-item pt-2 pb-2">-</li>
+                    <li id="country-language" class="list-group-item pt-2 pb-2">-</li>
+                    <li id="country-timezone" class="list-group-item pt-2 pb-2"> - </li>
+                    <li id="country-latitude" class="list-group-item pt-2 pb-2">-</li>
+                    <li id="country-longitude" class="list-group-item pt-2 pb-2">-</li>
+                    <li id="country-border" class="list-group-item pt-2 pb-2"> - </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
