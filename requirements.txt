@@ -12,3 +12,5 @@ requests==2.25.1
 urllib3==1.26.4
 Werkzeug @ file:///home/ktietz/src/ci/werkzeug_1611932622770/work
 Wikipedia-API==0.5.4
+
+flask~=1.1.2
